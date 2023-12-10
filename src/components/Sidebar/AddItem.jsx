@@ -1,6 +1,8 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Button from "../Button";
-const AddItem = ({ onAddItem }) => {
+import { itemContext } from "../../context/ItemsContextProvider";
+const AddItem = () => {
+  const { addNewItem } = useContext(itemContext);
   const [newItem, setnewItem] = useState("");
   const inputRef = useRef();
   return (
@@ -14,7 +16,7 @@ const AddItem = ({ onAddItem }) => {
           return;
         }
 
-        onAddItem(newItem);
+        addNewItem(newItem);
         setnewItem("");
       }}
     >

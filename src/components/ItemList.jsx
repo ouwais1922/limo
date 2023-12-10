@@ -1,15 +1,16 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import Select from "react-select";
 import EmptyView from "./EmptyView";
-import { useEffect, useState } from "react";
-const ItemList = ({ item, remeoveElement, toggleIteme }) => {
-  const options = [
-    { value: "default", label: "Default tasks" },
-    { value: "packed", label: "Packed tasks" },
-    { value: "upacked", label: "Unpacked tasks" },
-  ];
+import { useState } from "react";
+import { itemContext } from "../context/ItemsContextProvider";
+const options = [
+  { value: "default", label: "Default tasks" },
+  { value: "packed", label: "Packed tasks" },
+  { value: "upacked", label: "Unpacked tasks" },
+];
+const ItemList = () => {
+  const { item, remeoveElement, toggleIteme } = useContext(itemContext);
   const [sorted, setSorted] = useState("default");
-  console.log(sorted);
   const sortedItems = useMemo(() => {
     return [...item].sort((a, b) => {
       if (sorted === "packed") {
@@ -18,14 +19,9 @@ const ItemList = ({ item, remeoveElement, toggleIteme }) => {
       if (sorted === "unpacked") {
         return a.packed - b.packed;
       }
-      // Handle the case where 'sorted' is neither "packed" nor "unpacked"
       return 0;
     });
   }, [item, sorted]);
-
-  useEffect(() => {
-    localStorage.setItem("chevara", JSON.stringify(item));
-  }, [item]);
 
   return (
     <ul>

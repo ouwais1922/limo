@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import Counter from "./Counter";
 import Logo from "./Logo";
-import { itemContext } from "../../context/ItemsContextProvider";
+import { useItemStore } from "../../store/itemStore";
 const Header = () => {
-  const { item } = useContext(itemContext);
+  const item = useItemStore((state) => state.item);
   return (
     <header>
       <Logo></Logo>

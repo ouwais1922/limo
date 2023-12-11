@@ -1,8 +1,8 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../Button";
-import { itemContext } from "../../context/ItemsContextProvider";
+import { useItemStore } from "../../store/itemStore";
 const AddItem = () => {
-  const { addNewItem } = useContext(itemContext);
+  const addNewItem = useItemStore((state) => state.addNewItem);
   const [newItem, setnewItem] = useState("");
   const inputRef = useRef();
   return (

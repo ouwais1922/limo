@@ -1,15 +1,15 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import Select from "react-select";
 import EmptyView from "./EmptyView";
 import { useState } from "react";
-import { itemContext } from "../context/ItemsContextProvider";
+import { useItemStore } from "../store/itemStore";
 const options = [
   { value: "default", label: "Default tasks" },
   { value: "packed", label: "Packed tasks" },
   { value: "upacked", label: "Unpacked tasks" },
 ];
 const ItemList = () => {
-  const { item, remeoveElement, toggleIteme } = useContext(itemContext);
+  const { item, remeoveElement, toggleIteme } = useItemStore();
   const [sorted, setSorted] = useState("default");
   const sortedItems = useMemo(() => {
     return [...item].sort((a, b) => {
